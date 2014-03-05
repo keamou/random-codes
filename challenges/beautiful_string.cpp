@@ -4,6 +4,15 @@ Given a string s, we say s is unique iff all characters in s are different.
 Given two strings s1 and s2, we say s1 is more beautiful than s2 iff (i) s1 is longer than s2, or (ii) the size of s1 equals the size of s2, and s1 is larger than s2 in alphabetical order.
 
 Question: given a string s, find the most beautiful unique substring of s.
+
+Example Input:
+
+babab
+
+The Output:
+
+ba
+
 */
 
 /*
