@@ -19,10 +19,12 @@ public:
         if ( n <= 1 ) return n;
         vector<int> nums( n+1, 1 );
         for ( int i=2; i<=n; i++ ) {
-            int tmp = nums[i-1] * 2;
-            for ( int j=2; j<i; j++ ) {
+            int tmp = 0;
+            for ( int j=1; j<=i/2; j++ ) {
                 tmp += nums[j-1] * nums[ i-j ];
             }
+            tmp = tmp * 2;
+            if ( i%2 ) tmp += nums[i/2] * nums[i/2];
             nums[i] = tmp;
         }
         return nums[n];
