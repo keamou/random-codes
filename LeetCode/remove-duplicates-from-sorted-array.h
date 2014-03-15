@@ -16,7 +16,7 @@ public:
     int removeDuplicates(int A[], int n) {
         if ( n == 0 ) return n;
         int idx = 0;
-        for ( int i=0; i<n; i++ ) {
+        for ( int i=1; i<n; i++ ) {
             if (A[idx] != A[i]) A[++idx] = A[i];
         }
         return (idx+1);
