@@ -33,7 +33,6 @@ public:
             minvec[i] = minval = (minval < minvec[i]) ? minvec[i] : minval;
         }
         for ( int i=0; i<prices.size(); i++ ) {
-            //tmp = getFirst(prices, minvec, i) + getSecond(prices, maxvec, i);
             tmp = maxvec[i] + minvec[i];
             if ( tmp > result ) result = tmp;
         }
