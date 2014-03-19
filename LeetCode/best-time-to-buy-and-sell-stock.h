@@ -10,7 +10,6 @@ class Solution {
 public:
     int maxProfit(vector<int> &prices) {
         if ( prices.empty() ) return 0;
-        vector<int> maxvec( prices.size() );
         int maxval = prices.back(), result = 0;
         for ( int i=prices.size()-1; i>=0; i-- ) {
             maxval = (maxval < prices[i]) ? prices[i] : maxval;
