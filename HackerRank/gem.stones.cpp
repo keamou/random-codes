@@ -42,7 +42,6 @@ int main() {
     getline(cin, str);
     
     while( n > 0 ) {
-        str.clear();
         getline(cin, str);
         tmp = 0;
         for ( int j=0; j<str.size(); j++ ) {
