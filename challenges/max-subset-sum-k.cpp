@@ -41,7 +41,6 @@ void maxSubset( int curidx, vector<int> & tmp, int cursum, vector<int> & vals, i
 
 	for ( int i=curidx+1; i<vals.size(); i++ ) {
 		if ( cursum + vals[i] <= k ) {
-			//if ( i>curidx && vals[i] == vals[i-1] ) continue;
 			tmp.push_back( vals[i] );
 			maxSubset ( i, tmp, cursum + vals[i], vals, k );
 			tmp.pop_back();
@@ -75,7 +74,6 @@ int main()
 
 	for ( int i=0; i<n; i++ ) {
 		if ( vals[i] <= k ) {
-			//if ( i>0 && vals[i] == vals[i-1] ) continue;
 			vector<int> tmp; tmp.push_back(vals[i]);
 			maxSubset ( i, tmp, vals[i], vals, k );
 			tmp.pop_back();
