@@ -28,46 +28,16 @@ confused what "{1,#,2,3}" means? > read more on how binary tree is serialized on
  */
 class Solution {
 public:
+    void searchNode(TreeNode *node, vector<int> & vec) {
+        if ( !node ) return;
+        searchNode ( node->left, vec );
+        vec.push_back( node->val );
+        searchNode ( node->right, vec );
+    }
+
     vector<int> inorderTraversal(TreeNode *root) {
-        stack<TreeNode *> mystack;
-        vector<int> result;
-        if ( root == NULL ) return result;
-        mystack.push( root );
-        TreeNode *lastptr = NULL;
-        while ( !mystack.empty() ) {
-            if ( mystack.top()->left ) {
-                if ( lastptr == mystack.top()->left ) {
-                    result.push_back( mystack.top()->val );
-                    if ( mystack.top()->right ) {
-                        mystack.push( mystack.top()->right );
-                    } else {
-                        lastptr = mystack.top();
-                        mystack.pop();
-                    }
-                } else {
-                    if ( mystack.top()->right ) {
-                        if ( lastptr == mystack.top()->right ) {
-                            lastptr = mystack.top();
-                            mystack.pop();
-                            continue;
-                        }
-                    }
-                    mystack.push( mystack.top()->left );
-                }
-            } else if ( mystack.top()->right ) {
-                if ( lastptr == mystack.top()->right ) {
-                    lastptr = mystack.top();
-                    mystack.pop();
-                } else {
-                    result.push_back( mystack.top()->val );
-                    mystack.push( mystack.top()->right );
-                }
-            } else {
-                result.push_back( mystack.top()->val );
-                lastptr = mystack.top();
-                mystack.pop();
-            }
-        }
-        return result;
+        vector<int> r;
+        searchNode(root, r);
+        return r;
     }
 };
