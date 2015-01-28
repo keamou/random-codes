@@ -26,36 +26,24 @@ This is because the new interval [4,9] overlaps with [3,5],[6,7],[8,10].
 class Solution {
 public:
     vector<Interval> insert(vector<Interval> &intervals, Interval newInterval) {
-        vector<Interval> result;
-        if ( intervals.empty() ) {
-            result.push_back( newInterval );
-            return result;
-        }
-        int i = 0;
-        for ( ; i<intervals.size(); i++ ) {
-            if ( intervals[i].end >= newInterval.start ) break;
+        vector<Interval> r;
+        if ( intervals.empty() ) { r.push_back(newInterval); return r; }
+        int i=0;
+        for (;i<intervals.size(); i++) {
+            if( intervals[i].end < newInterval.start ) { r.push_back(intervals[i]); }
+            else break;
         }
         
-        for ( int j=0; j<i; j++ ) result.push_back( intervals[j] );
-        
-        if ( i == intervals.size() ) {
-            result.push_back ( newInterval );
-        } else {
-            if ( intervals[i].start > newInterval.end ) {
-                result.push_back ( newInterval );
-            } else {
-                int start = min ( intervals[i].start, newInterval.start);
-                for ( ++i ; i<intervals.size(); i++ ) {
-                    if ( intervals[i].start > newInterval.end ) break;
-                }
-                int end = max( newInterval.end, intervals[i-1].end );
-                Interval tmp ( start, end );
-                result.push_back ( tmp );
-            }
+        for (;i<intervals.size(); i++) {
+            if ( intervals[i].start <= newInterval.end ) {
+                newInterval.start = min( newInterval.start, intervals[i].start );
+                newInterval.end = max( newInterval.end, intervals[i].end );
+            } else break;
         }
+        r.push_back( newInterval );
         
-        for ( int j=i; j<intervals.size(); j++ ) result.push_back( intervals[j] );
-        
-        return result;
+        for (;i<intervals.size(); i++) { r.push_back(intervals[i]); }
+
+        return r;
     }
 };
