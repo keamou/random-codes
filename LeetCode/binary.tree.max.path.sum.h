@@ -25,42 +25,21 @@ Return 6.
  */
 class Solution {
 public:
-    int maxval ( int a, int b ) {
-        if ( a > b ) return a;
-        return b;
-    }
-    int check( TreeNode* node, int& sum ) {
+    int search ( TreeNode *node, int &sum ) {
         if ( !node ) return 0;
-        int leftsum = 0, rightsum = 0;
-        if ( node->left ) leftsum = check( node->left, sum );
-        if ( node->right) rightsum= check( node->right, sum);
-        int sum1 = leftsum + rightsum + node->val;
-        int sum2 = leftsum + node->val;
-        int sum3 = rightsum + node->val;
-        int sum4 = node->val;
-        int tmp = maxval( sum1, maxval( sum2, maxval( sum3, sum4 ) ) );
-        if ( tmp > sum ) sum = tmp;
-        if ( sum2 > sum3 ) {
-            if ( sum2 > sum4 ) {
-                return sum2;
-            } else {
-                return sum4;
-            }
-        } else {
-            if ( sum3 > sum4 ) {
-                return sum3;
-            } else {
-                return sum4;
-            }
+        int left = search ( node->left, sum );
+        int right = search( node->right,sum );
+        if ( left < 0 ) left = 0;
+        if ( right <0 ) right = 0;
+        if ( sum == INT_MIN || left + right + node->val > sum ) {
+            sum = left + right + node->val;
         }
+        return max(left, right) + node->val;
     }
-    
+
     int maxPathSum(TreeNode *root) {
-        // IMPORTANT: Please reset any member data you declared, as
-        // the same Solution instance will be reused for each test case.
-        if ( !root ) return 0;
-        int sum = root->val;
-        int tmp = check( root, sum );
+        int sum = INT_MIN;
+        search(root, sum);
         return sum;
     }
 };
